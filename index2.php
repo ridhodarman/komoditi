@@ -15,12 +15,12 @@
         $jenis = $data['nama_jenis'];
         $satuan = "(".$data['satuan'].") ";
         $n=0;
-        $sql2=pg_query("SELECT H.*, K.kabkot FROM hasil AS H
-                        join indo_kab_kot AS K ON H.gid=K.gid
+        $sql2=pg_query("SELECT H.*, K.kabupaten FROM hasil AS H
+                        join sumbar AS K ON H.gid=K.gid
                         join jenis AS J ON J.id_jenis=H.id_jenis
-                        where H.id_jenis = '$no'");
+                        where H.id_jenis = '$no' order by H.gid");
         while ($data2=pg_fetch_assoc($sql2)) {
-            $kabkot[$n]=$data2['kabkot'];
+            $kabupaten[$n]=$data2['kabupaten'];
             $jumlah[$n]=$data2['jumlah'];
             $n++;
         }     
@@ -40,10 +40,10 @@
                       $i=0;
                       while ($i<$n) {
                         if ($i<$n-1) {
-                          echo "'".$kabkot[$i]."',";
+                          echo "'".$kabupaten[$i]."',";
                         }
                         else {
-                          echo "'".$kabkot[$i]."'" ;
+                          echo "'".$kabupaten[$i]."'" ;
                         }
                         $i++;
                       } 
@@ -124,6 +124,7 @@ function digitasinya() {
         var data = arrays.features[i];
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
+        var id = data.properties.id;
         var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailrumah("+'"'+data.properties.id+'"'+")'></button>";
         var p1 = ' ID: ' + data.properties.id;
         var p2 = '<p>' + data.properties.nama + '</p>';
@@ -140,14 +141,72 @@ function digitasinya() {
           };
           idTitik += 1;
         }
+        var color = 'black';
+        if (id=="59") {
+        	color='yellow';
+        }
+        else if (id=="60") {
+        	color='magenta';
+        }
+        else if (id=="61") {
+        	color='green';
+        }
+        else if (id=="62") {
+        	color='red';
+        }
+        else if (id=="63") {
+        	color='blue';
+        }
+        else if (id=="65") {
+        	color='SpringGreen';
+        }
+        else if (id=="66") {
+        	color='purple';
+        }
+        else if (id=="67") {
+        	color='cyan';
+        }
+        else if (id=="68") {
+        	color='white';
+        }
+        else if (id=="69") {
+        	color='navy';
+        }
+        else if (id=="70") {
+        	color='Chartreuse';
+        }
+        else if (id=="71") {
+        	color='purple';
+        }
+        else if (id=="72") {
+        	color='DarkOrange';
+        }
+        else if (id=="73") {
+        	color='Gold';
+        }
+        else if (id=="74") {
+        	color='Indigo';
+        }
+        else if (id=="75") {
+        	color='LightCoral';
+        }
+        else if (id=="76") {
+        	color='MediumBlue';
+        }
+        else if (id=="77") {
+        	color='Sienna';
+        }
+        else if (id=="78") {
+        	color='black';
+        }
 
         digitkota[nkota] = new google.maps.Polygon({
           paths: hitungTitik,
-          strokeColor: 'yellow',
+          strokeColor: 'red',
           strokeOpacity: 2,
           strokeWeight: 0.5,
           //fillColor: '#B22222',
-          fillColor: 'brown',
+          fillColor: color,
           fillOpacity: 0.5,
           zIndex: 1,
           content: p3
