@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title> Cara Membuat Spoiler Pada Dokumen HTML </title>
+</head>
+
+<body>
+<!-- Awal Script Spoiler --> 
+<div>
+<div style="margin-bottom: 5px;">
+<span style="font-size: large; font-weight:bold;">Judul Spoiler:</span>
+<input value="Buka" type="button" onclick="if (this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = ''; this.innerText = ''; this.value = 'Tutup'; } else { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none'; this.innerText = ''; this.value = 'Buka'; }"></div>
+<div style="margin: 0px; padding: 10px; border: 1px inset;">
+<div style="display: none;">
+
+Letakan Konten Di Sini..!!
+
+</div>
+</div>
+</div>
+<!-- Akhir Script Spoiler -->
+
+<!-- Awal Script Spoiler --> 
+<div>
+<div style="margin-bottom: 5px;">
+<span style="font-size: large; font-weight:bold;">Judul Spoiler:</span>
+<input value="Buka" type="button" onclick="if (this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = ''; this.innerText = ''; this.value = 'Tutup'; } else { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none'; this.innerText = ''; this.value = 'Buka'; }"></div>
+<div style="margin: 0px; padding: 10px; border: 1px inset;">
+<div style="display: none;">
+
+Letakan Konten Di Sini..!!
+
+</div>
+</div>
+</div>
+<!-- Akhir Script Spoiler -->
+</body>
+</html>
