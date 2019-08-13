@@ -147,7 +147,29 @@
                                 <div class="card-body">
 
                                     <h4 class="mt-0 header-title mb-4">Peta</h4>
-                                        <div id="map" style="width: 100%; height: 400px"></div>
+                                        <div id="map" style="width: 82%; height: 400px; float: left;"></div>
+                                        <div style="width: 18%; float: right; padding-left: 2%">
+                                          <center><h5>LEGEND</h5></center>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Padang</div>
+                                          <div><font color="73BA66"><i class="fas fa-stop"></i></font>&nbsp;Kota Solok</div>
+                                          <div><font color="DFF5E7C"><i class="fas fa-stop"></i></font>&nbsp;Kota Sawahlunto</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Padang Panjang</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Bukittinggi</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Payakumbuh</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Pariaman</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Kep. Mentawai</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pesisir Selatan</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Solok</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Sijunjung</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Tanah Datar</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Padang Pariaman</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Agam</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Lima Puluh Kota</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pasaman</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Solok Selatan</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Dharmasraya</div>
+                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pasaman Barat</div>
+                                        </div>
                                     <div id="morris-area-example" class="morris-charts morris-chart-height"></div>
 
                                 </div>
@@ -281,10 +303,7 @@ $no++;
     <script src="assets/js/waves.min.js"></script>
 
     <!--Morris Chart-->
-    <script src="../plugins/morris/morris.min.js"></script>
-    <script src="../plugins/raphael/raphael.min.js"></script>
 
-    <script src="assets/pages/dashboard.init.js"></script>
 
     <!-- App js -->
     <script src="assets/js/app.js"></script>
@@ -343,7 +362,7 @@ function digitasinya() {
             color='red';
         }
         else if (id=="63") {
-            color='blue';
+            color='violet';
         }
         else if (id=="65") {
             color='SpringGreen';
@@ -355,16 +374,16 @@ function digitasinya() {
             color='cyan';
         }
         else if (id=="68") {
-            color='white';
+            color='purple';
         }
         else if (id=="69") {
-            color='navy';
+            color='azure';
         }
         else if (id=="70") {
-            color='Chartreuse';
+            color='MediumBlue';
         }
         else if (id=="71") {
-            color='purple';
+            color='white';
         }
         else if (id=="72") {
             color='DarkOrange';
@@ -379,7 +398,7 @@ function digitasinya() {
             color='LightCoral';
         }
         else if (id=="76") {
-            color='MediumBlue';
+            color='Chartreuse';
         }
         else if (id=="77") {
             color='Sienna';
