@@ -119,14 +119,10 @@
                 <div class="container-fluid">
                     <div class="page-title-box">
                         <div class="row align-items-center">
-                            <div class="col-sm-6">
-                                <h4 class="page-title">Dashboard</h4>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-right">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Stexo</a></li>
-                                    <li class="breadcrumb-item active">Dashboard</li>
-                                </ol>
+                            <div class="col-sm-12">
+                              <center>
+                                <h4 class="page-title" style="width: 100%">LAHAN KERING DAN LAHAN BERDASARKAN PENGGUNAANNYA MENURUT KABUPATEN/KOTA DI PROVINSI SUMATERA BARAT</h4>
+                              </center>
                             </div>
                         </div>
                         <!-- end row -->
@@ -151,43 +147,42 @@
                                         <div style="width: 18%; float: right; padding-left: 2%">
                                           <center><h5>LEGEND</h5></center>
                                           <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Padang</div>
-                                          <div><font color="73BA66"><i class="fas fa-stop"></i></font>&nbsp;Kota Solok</div>
-                                          <div><font color="DFF5E7C"><i class="fas fa-stop"></i></font>&nbsp;Kota Sawahlunto</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Padang Panjang</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Bukittinggi</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Payakumbuh</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Pariaman</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Kep. Mentawai</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pesisir Selatan</div>
+                                          <div><font color="7EBE71"><i class="fas fa-stop"></i></font>&nbsp;Kota Solok</div>
+                                          <div><font color="DBF4E3"><i class="fas fa-stop"></i></font>&nbsp;Kota Sawahlunto</div>
+                                          <div><font color="7AFABA"><i class="fas fa-stop"></i></font>&nbsp;Kota Padang Panjang</div>
+                                          <div><font color="FD782B"><i class="fas fa-stop"></i></font>&nbsp;Kota Bukittinggi</div>
+                                          <div><font color="DABADA"><i class="fas fa-stop"></i></font>&nbsp;Kota Payakumbuh</div>
+                                          <div><font color="B575B5"><i class="fas fa-stop"></i></font>&nbsp;Kota Pariaman</div>
+                                          <div><font color="61B65A"><i class="fas fa-stop"></i></font>&nbsp;Kab. Kep. Mentawai</div>
+                                          <div><font color="8D75A8"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pesisir Selatan</div>
                                           <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Solok</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Sijunjung</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Tanah Datar</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Padang Pariaman</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Agam</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Lima Puluh Kota</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pasaman</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Solok Selatan</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Dharmasraya</div>
-                                          <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pasaman Barat</div>
+                                          <div><font color="DFB5A7"><i class="fas fa-stop"></i></font>&nbsp;Kab. Sijunjung</div>
+                                          <div><font color="677567"><i class="fas fa-stop"></i></font>&nbsp;Kab. Tanah Datar</div>
+                                          <div><font color="E1BC5A"><i class="fas fa-stop"></i></font>&nbsp;Kab. Padang Pariaman</div>
+                                          <div><font color="F9F977"><i class="fas fa-stop"></i></font>&nbsp;Kab. Agam</div>
+                                          <div><font color="A675A6"><i class="fas fa-stop"></i></font>&nbsp;Kab. Lima Puluh Kota</div>
+                                          <div><font color="67F5E7"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pasaman</div>
+                                          <div><font color="B79E7E"><i class="fas fa-stop"></i></font>&nbsp;Kab. Solok Selatan</div>
+                                          <div><font color="E775E7"><i class="fas fa-stop"></i></font>&nbsp;Kab. Dharmasraya</div>
+                                          <div><font color="E7E167"><i class="fas fa-stop"></i></font>&nbsp;Kab. Pasaman Barat</div>
                                         </div>
                                     <div id="morris-area-example" class="morris-charts morris-chart-height"></div>
 
                                 </div>
                             </div>
                         </div>
-                        <!-- end col -->
+                        <!-- end col -->                   
                         
-                        
-                                        <?php
-      $sql=pg_query("SELECT * FROM jenis");
+    <?php
+      $sql=pg_query("SELECT DISTINCT id_jenis, nama_jenis, satuan FROM jenis_lahan order by id_jenis");
       $no=1;
       while ($data=pg_fetch_assoc($sql)) {
         $jenis = $data['nama_jenis'];
         $satuan = "(".$data['satuan'].") ";
         $n=0;
-        $sql2=pg_query("SELECT H.*, K.kabupaten FROM hasil AS H
+        $sql2=pg_query("SELECT H.*, K.kabupaten FROM hasil_lahan AS H
                         join sumbar AS K ON H.gid=K.gid
-                        join jenis AS J ON J.id_jenis=H.id_jenis
+                        join jenis_lahan AS J ON J.id_jenis=H.id_jenis
                         where H.id_jenis = '$no' order by H.gid");
         while ($data2=pg_fetch_assoc($sql2)) {
             $kabupaten[$n]=$data2['kabupaten'];
@@ -235,7 +230,7 @@
                       } 
             ?>],
               backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
+              'RGBA(255,251,80,0.41)',
               'rgba(54, 162, 235, 0.2)',
               'rgba(255, 206, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
@@ -243,7 +238,7 @@
               'rgba(255, 159, 64, 0.2)'
               ],
               borderColor: [
-              'rgba(255,99,132,1)',
+              'RGB(255,254,27)',
               'rgba(54, 162, 235, 1)',
               'rgba(255, 206, 86, 1)',
               'rgba(75, 192, 192, 1)',
@@ -284,7 +279,7 @@ $no++;
             <!-- content -->
 
             <footer class="footer">
-                © 2019 Stexo <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</span>.
+                © 2019 <span class="d-none d-sm-inline-block"> - Universitas Andalas</span>.
             </footer>
 
         </div>
@@ -333,10 +328,8 @@ function digitasinya() {
         var arrayGeometries = data.geometry.coordinates;
         var jenis = data.jenis;
         var id = data.properties.id;
-        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailrumah("+'"'+data.properties.id+'"'+")'></button>";
-        var p1 = ' ID: ' + data.properties.id;
-        var p2 = '<p>' + data.properties.nama + '</p>';
-        var p3 = link + p1 + p2 +'('+jenis+') ';
+        var nama = data.properties.nama;
+        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailprov("+'"'+data.properties.id+'"'+", "+'"'+data.properties.nama+'"'+")'></button> "+nama;
         var idTitik = 0;
         var hitungTitik = [];
         while (idTitik < arrayGeometries[0][0].length) {
@@ -413,9 +406,9 @@ function digitasinya() {
           strokeWeight: 0.5,
           //fillColor: '#B22222',
           fillColor: color,
-          fillOpacity: 0.5,
+          fillOpacity: 0.7,
           zIndex: 1,
-          content: p3
+          content: link
         });
         digitkota[nkota].setMap(map);
         digitkota[nkota].addListener('click', function (event) {
@@ -428,6 +421,7 @@ function digitasinya() {
           infoWindow.setContent(this.content);
           infoWindow.setPosition(info);
           infoWindow.open(map);
+          //detailprov(id, nama)
         });
         nkota = nkota + 1;
       }
@@ -442,9 +436,69 @@ function digitasinya() {
     map: map
   });
 } 
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE&callback=initMap"
-    async defer></script>
+
+var markersDua = [];
+var infoDua = [];
+
+function detailprov(id,nama) { //menampilkan informasi
+  prov=nama;
+  hapusInfo();
+  console.log("fungsi info marker id=" + id);
+    $.ajax({
+    url: 'act/detail_lahan.php?cari=' + id,
+    data: "",
+    dataType: 'json',
+    success: function (rows) {
+      for (var i in rows) {
+        var row = rows[i];
+        var id = row.id;
+        var text = row.text;
+        var latitude = row.latitude;
+        var longitude = row.longitude;
+        centerBaru = new google.maps.LatLng(row.latitude, row.longitude);
+        marker = new google.maps.Marker({
+          position: centerBaru,
+          map: map,
+          animation: google.maps.Animation.DROP,
+        });
+        markersDua.push(marker);
+        map.setCenter(centerBaru);
+        map.setZoom(10);
+        infowindow = new google.maps.InfoWindow({
+          position: centerBaru,
+          content: "<span style=color:black><center><b>" + prov + "</b><p>" + text + "<br></span>",
+          pixelOffset: new google.maps.Size(0, -33)
+        });
+        infoDua.push(infowindow);
+        infowindow.open(map);
+        klikInfoWindowLahan(id);
+      }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#gagal').modal('show');
+      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
+      $('#notifikasi').append(thrownError);
+    }
+  });
+}
+
+function klikInfoWindowLahan(id) {
+  google.maps.event.addListener(marker, "click", function () {
+    console.log("marker dengan id=" + id + " diklik");
+    detailprov(id);
+  });
+
+}
+
+function hapusInfo() {
+  for (var i = 0; i < infoDua.length; i++) {
+    markersDua[i].setMap(null);
+    infoDua[i].setMap(null);
+  }
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE&callback=initMap"
+async defer></script>
 
 </body>
 
