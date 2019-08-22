@@ -318,6 +318,7 @@ $no++;
             zoom: 8,
             mapTypeId: 'roadmap'
           });
+          mentawai();
           digitasinya();
       }
 var nkota = 0; var digitkota = [];
@@ -441,6 +442,7 @@ function digitasinya() {
   });
 } 
 
+
 var markersDua = [];
 var infoDua = [];
 
@@ -501,7 +503,22 @@ function hapusInfo() {
   }
 }
 
-
+function mentawai()
+{
+  cull = new google.maps.Data();
+  cull.loadGeoJson('inc/mentawai.php');
+  cull.setStyle(function(feature)
+  {
+    return({
+            fillColor: 'black',
+            strokeColor: '#f75d5d ',
+            strokeWeight: 0.4,
+            fillOpacity: 0.8
+          });          
+  }
+  );
+  cull.setMap(map);
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE&callback=initMap"
 async defer></script>
