@@ -124,7 +124,7 @@
                                           <center><h5>LEGEND</h5></center>
                                           <div><font color="ECB6EC"><i class="fas fa-stop"></i></font>&nbsp;Kota Padang</div>
                                           <div><font color="7EBE71"><i class="fas fa-stop"></i></font>&nbsp;Kota Solok</div>
-                                          <div><font color="000014"><i class="fas fa-stop"></i></font>&nbsp;Kota Sawahlunto</div>
+                                          <div><font color="445D67"><i class="fas fa-stop"></i></font>&nbsp;Kota Sawahlunto</div>
                                           <div><font color="7AFABA"><i class="fas fa-stop"></i></font>&nbsp;Kota Padang Panjang</div>
                                           <div><font color="FD782B"><i class="fas fa-stop"></i></font>&nbsp;Kota Bukittinggi</div>
                                           <div><font color="DABADA"><i class="fas fa-stop"></i></font>&nbsp;Kota Payakumbuh</div>
