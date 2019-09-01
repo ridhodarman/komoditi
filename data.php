@@ -4,7 +4,7 @@ $sql  = "SELECT
 			ST_AsGeoJSON(geom)::json As geometry,
 			gid,
 			kabupaten
-		FROM sumbar order by gid 
+		FROM kab_kota order by gid 
 		";
 		$geojson = array(
 			'type'      => 'FeatureCollection',

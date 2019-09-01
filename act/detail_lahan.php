@@ -4,7 +4,7 @@ $cari = $_GET["cari"];
 $querysearch = "SELECT J.nama_jenis, H.jumlah, ST_X(ST_Centroid(S.geom)) AS lng, ST_Y(ST_CENTROID(S.geom)) AS lat
 				FROM hasil_lahan AS H
 				JOIN jenis_lahan AS J ON H.id_jenis=J.id_jenis
-				JOIN sumbar AS S ON S.gid=H.gid
+				JOIN kab_kota AS S ON S.gid=H.gid
 				WHERE H.gid='$cari'";
 $hasil = pg_query($querysearch);
 $n=0;
