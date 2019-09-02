@@ -15,8 +15,6 @@
     <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="js/Chart.js"></script>
-
     <?php include('koneksi.php'); ?>
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
  -->

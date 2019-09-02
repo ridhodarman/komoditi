@@ -3,8 +3,8 @@ include('koneksi.php');
 $sql  = "SELECT  
 			ST_AsGeoJSON(geom)::json As geometry,
 			gid,
-			kabupaten
-		FROM sumbar order by gid 
+			nama
+		FROM kab_kota order by gid 
 		";
 		$geojson = array(
 			'type'      => 'FeatureCollection',
@@ -19,7 +19,7 @@ $sql  = "SELECT
 				'jenis' => "kota/kab",
 				'properties' => array(
 					'id' => $rows['gid'],
-					'nama' => $rows['kabupaten']
+					'nama' => $rows['nama']
 				)
 			);
 			array_push($geojson['features'], $feature);

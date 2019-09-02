@@ -15,7 +15,8 @@
     <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="js/Chart.js"></script>
+    <script src="code/highcharts.js"></script>
+	<script src="code/modules/exporting.js"></script>
 
     <?php include('koneksi.php'); ?>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -154,14 +155,15 @@
       $no=1;
       while ($data=pg_fetch_assoc($sql)) {
         $jenis = $data['nama_jenis'];
-        $satuan = "(".$data['satuan'].") ";
+        $id_jenis = $data['id_jenis'];
+        $satuan = $data['satuan'];
         $n=0;
-        $sql2=pg_query("SELECT H.*, K.kabupaten FROM hasil AS H
-                        join sumbar AS K ON H.gid=K.gid
+        $sql2=pg_query("SELECT H.*, K.nama FROM hasil AS H
+                        join kab_kota AS K ON H.gid=K.gid
                         join jenis AS J ON J.id_jenis=H.id_jenis
-                        where H.id_jenis = '$no' and H.tahun = '$tahun' order by H.gid");
+                        where H.id_jenis = '$id_jenis' and H.tahun = '$tahun' order by H.gid");
         while ($data2=pg_fetch_assoc($sql2)) {
-            $kabupaten[$n]=$data2['kabupaten'];
+            $kabupaten[$n]=$data2['nama'];
             $jumlah[$n]=$data2['jumlah'];
             $n++;
         }     
@@ -169,17 +171,22 @@
     <div class="col-xl-12">
       <div class="card m-b-30">
           <div class="card-body">
-      <center><h1 class="mt-0 header-title mb-4"><?php echo $jenis ?></h1></center>
-      <canvas id="myChart<?php echo $no ?>"></canvas>
+      <div id="container<?php echo $no ?>" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
           </div>
         </div>
       </div>
-      <script>
-        var ctx = document.getElementById("myChart<?php echo $no ?>").getContext('2d');
-        var myChart = new Chart(ctx, {
-          type: 'horizontalBar',
-          data: {
-            labels: [<?php
+      		<script type="text/javascript">
+
+Highcharts.chart('container<?php echo $no ?>', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: '<?php echo $jenis ?>'
+    },
+    xAxis: {
+        categories: [
+            <?php
                       $i=0;
                       while ($i<$n) {
                         if ($i<$n-1) {
@@ -190,79 +197,48 @@
                         }
                         $i++;
                       } 
-            ?>],
-            datasets: [{
-              label: '<?php echo $satuan ?>',
-              data: [<?php
+            ?>
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Jumlah (<?php echo $satuan ?>)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} <?php echo $satuan ?></b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: '<?php echo $jenis ?>',
+        data: [<?php
                       $i=0;
                       while ($i<$n) {
                         if ($i<$n-1) {
-                          echo "'".$jumlah[$i]."',";
+                          echo $jumlah[$i].",";
                         }
                         else {
-                          echo "'".$jumlah[$i]."'" ;
+                          echo $jumlah[$i] ;
                         }
                         $i++;
                       } 
-            ?>],
-              backgroundColor: [
-              'RGBA(255,251,80,0.41)',     //kab.agam
-              'rgba(255,0,255,0.36)',      //kab. dharms
-              'RGBA(0,10,0,0.34)',         //kab. kep ment
-              'RGBA(255,86,45,0.42)',      //kot bukittg
-              'RGBA(230,118,227,0.42)',    //kot padang
-              'RGBA(4,255,70,0.42)',       //kot padangpj
-              'RGBA(133,74,45,0.76)',      //kot pariaman
-              'RGBA(53,255,255,0.36)',     //kab. pasaman
-              'RGBA(171,41,187,0.42)',     //kab limapuluh koto
-              'RGBA(0,0,20,0.63)',         //kot sawahlunto
-              'RGBA(0,0,215,0.4)',         //kab solok
-              'RGBA(156,0,149,0.4)',       //kot payakumbuh
-              'RGBA(255,166,54,0.34)',     //kab. padang pariaman
-              'RGBA(255,219,54,0.34)',     //kab. pasaman barat
-              'RGBA(43,0,6,0.34)',         //kab pesisir selatn
-              'RGBA(239,119,101,0.34)',    //kab. sijunjung
-              'RGBA(59,192,34,0.34)',      //kot solok
-              'RGBA(157,104,60,0.34)',     //kab. solok selatn
-              'RGBA(0,163,0,0.53)'         //kab. tanah datar
-               
-              ],
-              borderColor: [
-              'RGB(255,254,27)',           //kab.agam
-              'rgba(255,0,255,1)',         //kab. dharms  
-              'RGBA(0,10,0,0.97)',         //kab. kep ment  
-              'RGBA(255,86,45,0.97)',      //kot bukittg     
-              'RGBA(230,118,227,0.97)',    //kot padang       
-              'RGBA(4,255,70,0.97)',       //kot padangpj    
-              'RGBA(133,74,45,0.97)',      //kot pariaman     
-              'RGBA(53,255,255,1)',        //kab. pasaman   
-              'RGBA(171,41,187,0.97)',     //kab limapuluh koto      
-              'RGBA(0,0,20,0.97)',         //kot sawahlunto  
-              'RGBA(0,0,215,0.4)',         //kab solok  
-              'RGBA(156,0,149,0.97)',      //kot payakumbuh     
-              'RGBA(255,166,54,0.97)',     //kab. padang pariaman      
-              'RGBA(255,219,54,0.97)',     //kab. pasaman barat      
-              'RGBA(43,0,6,0.97)',         //kab pesisir selatn  
-              'RGBA(239,119,101,0.97)',    //kab. sijunjung       
-              'RGBA(59,192,34,0.97)',      //kot solok     
-              'RGBA(157,104,60,0.97)',     //kab. solok selatn      
-              'RGBA(0,163,0,0.97)'         //kab. tanah datar  
-              
-              ],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero:true
-                }
-              }]
-            }
-          }
-        });
-      </script>
+            ?>]
+
+    }]
+});
+		</script>
 <?php
 $no++;
 }
@@ -505,9 +481,9 @@ function hapusInfo() {
 
 function mentawai()
 {
-  mentawai = new google.maps.Data();
-  mentawai.loadGeoJson('inc/mentawai.php');
-  mentawai.setStyle(function(feature)
+  cull = new google.maps.Data();
+  cull.loadGeoJson('inc/mentawai.php');
+  cull.setStyle(function(feature)
   {
     return({
             fillColor: 'black',
@@ -517,7 +493,7 @@ function mentawai()
           });          
   }
   );
-  mentawai.setMap(map);
+  cull.setMap(map);
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE&callback=initMap"

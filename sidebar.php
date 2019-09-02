@@ -9,7 +9,7 @@
                         </li> -->
 
                         <li>
-                            <a href="javascript:void(0);" class="waves-effect"><i class="icon-mail-open"></i><span> Show Data <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="icon-mail-open"></i><span> Filter Data <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
                             <ul class="submenu">
                                 <li><a href="javascript:void(0);">Pilih Kategori:</a></li>
                                 <li><a>
@@ -23,9 +23,15 @@
                                   </select>
                                 </a></li>
                                 <li><a href="javascript:void(0);">Tahun:</a></li>
-                                <li><a href="javascript:void(0);"><input type="number" name="" id="tahun" value="2017"></a></li>                       
+                                <li><a href="#"><input type="number" name="" id="tahun" value="2017" style="width: 100px"></a></li>                       
                                 <li><a href="javascript:void(0);"><button class="btn btn-success" onclick="tampilkandata()">Search</button></a></li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="sumbar.php" class="waves-effect"><i class="icon-mail-open"></i><span> Data Sumbar Per Tahun</span> </span></a>
+                        </li>
+                        <li>
+                            <a href="pp.php" class="waves-effect"><i class="icon-mail-open"></i><span> Data Pertanian & Peternakan</span> </span></a>
                         </li>
 
                     </ul>
