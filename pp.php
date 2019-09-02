@@ -82,12 +82,12 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <?php
-          $kategori = $_GET['kategori'];
-          $tahun = $_GET['tahun'];
-          $sql=pg_query("SELECT nama_kategori FROM kategori where id_kategori = '$kategori'");
-          while ($data=pg_fetch_assoc($sql)) {
-            $nama_kategori = $data['nama_kategori'];
-          }   
+          // $kategori = $_GET['kategori'];
+          // $tahun = $_GET['tahun'];
+          // $sql=pg_query("SELECT nama_kategori FROM kategori where id_kategori = '$kategori'");
+          // while ($data=pg_fetch_assoc($sql)) {
+          //   $nama_kategori = $data['nama_kategori'];
+          // }   
         ?>
 
         <div class="content-page">
@@ -96,11 +96,11 @@
                 <div class="container-fluid">
                     <div class="page-title-box">
                         <div class="row align-items-center">
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                               <center>
                                 <h4 class="page-title" style="width: 100%"><?php echo $nama_kategori; ?> Tahun <?php echo $tahun; ?></h4>
                               </center>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- end row -->
                     </div>
@@ -152,7 +152,7 @@
                         
     <?php
       $sql=pg_query("SELECT id_jenis, nama_jenis, satuan FROM jenis where id_kategori='2' or id_kategori='3' order by id_jenis");
-      $no=1;$k=0;$batas=0;$id_jenis="null";
+      $no=0;$k=0;$batas=0;$id_jenis="null";$t=0;
       while ($data=pg_fetch_assoc($sql)) {
         $n=0;
         $jenis[$k] = $data['nama_jenis'];
@@ -161,15 +161,15 @@
         }
         $id_jenis = $data['id_jenis'];
         $satuan = $data['satuan'];
-        $sql2=pg_query("SELECT H.*, K.kabupaten FROM hasil AS H
+        $sql2=pg_query("SELECT H.*, K.nama FROM hasil AS H
                         join kab_kota AS K ON H.gid=K.gid
                         join jenis AS J ON J.id_jenis=H.id_jenis
                         where H.id_jenis = '$id_jenis' order by H.gid");
         while ($data2=pg_fetch_assoc($sql2)) {
-            $kabupaten[$n]=$data2['kabupaten'];
+            $kabupaten[$n]=$data2['nama'];
             $jumlah[$n][$k]=$data2['jumlah'];
             //echo "(".$n.") "."(".$k.") " . $data2['jumlah']. "<br/>";
-            $n++;
+            $n++;$t++;
         }
         $no++;$k++;
       }     
@@ -188,7 +188,7 @@ Highcharts.chart('container<?php echo $no ?>', {
         type: 'column'
     },
     title: {
-        text: '<?php echo $jenis ?>'
+        text: ''
     },
     xAxis: {
         categories: [
@@ -230,19 +230,24 @@ Highcharts.chart('container<?php echo $no ?>', {
     series: [
         <?php
           $i=0;
-          while ($i<$n) {
-            if ($i<$n-1) {
+          $nn=$n/2;$a=0;
+          while ($i<$nn) {
+            if ($i==$n-1) {
+              $a=0;
+            }
+            if ($i<$nn-1) {
               echo "
                 {
                 name: '".$jenis[$i]."',
                 data: [";
                               $m=0;
-                              while ($m<$batas-1) {
-                                if ($m<$batas-2) {
-                                  echo $jumlah[$m][$i].",";
+                              while ($m<$n) {
+                                //echo "test123"; echo $m; echo $i; echo $batas-1;echo "<br/>";
+                                if ($m<$n-1) {
+                                  echo $jumlah[$m][$a].",";
                                 }
                                 else {
-                                  echo $jumlah[$m][$i];
+                                  echo $jumlah[$m][$a];
                                 }
                                 $m++;
                               } 
@@ -257,13 +262,13 @@ Highcharts.chart('container<?php echo $no ?>', {
                 name: '".$jenis[$i]."',
                 data: [";
                               $m=0;
-                              while ($m<$batas-1) {
+                              while ($m<$n) {
                                 //echo "test123"; echo $m; echo $i; echo $batas-1;echo "<br/>";
-                                if ($m<$batas-2) {
-                                  echo $jumlah[$m][$i].",";
+                                if ($m<$n-1) {
+                                  echo $jumlah[$m][$a].",";
                                 }
                                 else {
-                                  echo $jumlah[$m][$i];
+                                  echo $jumlah[$m][$a];
                                 }
                                 $m++;
                               } 
@@ -272,12 +277,15 @@ Highcharts.chart('container<?php echo $no ?>', {
                 } ]
               ";
             }
-            $i++;
+            $i++;$a++;
           } 
         ?>
 
     });
 		</script>
+    <?php
+      echo $n." - ".$t;
+    ?>
                                     <div id="morris-area-example" class="morris-charts morris-chart-height"></div>
                                 </div>
                             </div>

@@ -28,13 +28,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="javascript:void(0);" class="waves-effect"><i class="icon-mail-open"></i><span> Data Sumbar Per Tahun</span> </span></a>
+                            <a href="sumbar.php" class="waves-effect"><i class="icon-mail-open"></i><span> Data Sumbar Per Tahun</span> </span></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0);" class="waves-effect"><i class="icon-mail-open"></i><span> Data Pertanian & Peternakan</span> </span></a>
-                        </li>
-                        <li>
-                            <a href="sumbar.php" class="waves-effect"><i class="icon-mail-open"></i><span> Data Sumbar</span> </span></a>
+                            <a href="pp.php" class="waves-effect"><i class="icon-mail-open"></i><span> Data Pertanian & Peternakan</span> </span></a>
                         </li>
 
                     </ul>

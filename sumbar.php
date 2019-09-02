@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xl-12">
+                        <!-- <div class="col-xl-12">
                             <div class="card m-b-30">
                                 <div class="card-body">
 
@@ -147,40 +147,50 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- end col -->                   
                         
     <?php
-      $sql=pg_query("SELECT id_jenis, nama_jenis, satuan FROM jenis where id_kategori = '$kategori' order by id_jenis");
-      $no=1;
+      $sql=pg_query("SELECT * FROM data_sumbar AS S
+                      join jenis AS j on S.id_jenis=j.id_jenis
+                      order by S.id_jenis");
+      $n=0;$m=0;$t=0;
+      $nama_jenis="null";
       while ($data=pg_fetch_assoc($sql)) {
-        $jenis = $data['nama_jenis'];
-        $id_jenis = $data['id_jenis'];
-        $satuan = $data['satuan'];
-        $n=0;
-        $sql2=pg_query("SELECT H.*, K.kabupaten FROM hasil AS H
-                        join kab_kota AS K ON H.gid=K.gid
-                        join jenis AS J ON J.id_jenis=H.id_jenis
-                        where H.id_jenis = '$id_jenis' and H.tahun = '$tahun' order by H.gid");
-        while ($data2=pg_fetch_assoc($sql2)) {
-            $kabupaten[$n]=$data2['kabupaten'];
-            $jumlah[$n]=$data2['jumlah'];
-            $n++;
-        }     
+        if ($nama_jenis != $data['nama_jenis']) {
+          $m=$m+1;
+          $n=0;
+        }
+        $nama_jenis = $data['nama_jenis'];echo $tahun = $data['tahun'];
+        $jenis[$m] = $nama_jenis;
+        $tahun[$m] = $data['tahun'];
+        $satuan[$m] = $data['satuan'];
+        $hasil[$n][$m][$t] = $data['hasil'];
+        echo "(".$n.")"."(".$m.")"."=".$data['hasil']."<br/>";
+        $n=$n+1;
+        $t=$t+1;
+      }
+
+    $i=1;
+    while ($i < $m) {
+      # code...
+    
     ?>
+
+
     <div class="col-xl-12">
       <div class="card m-b-30">
           <div class="card-body">
-      <div id="container<?php echo $no ?>" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+      <div id="container<?php echo $i ?>" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
           </div>
         </div>
       </div>
       		<script type="text/javascript">
 
-Highcharts.chart('container<?php echo $no ?>', {
+Highcharts.chart('container<?php echo $i ?>', {
 
     title: {
-        text: 'Solar Employment Growth by Sector, 2010-2016'
+        text: '<?php echo $jenis[$i] ?>'
     },
 
     subtitle: {
@@ -242,8 +252,9 @@ Highcharts.chart('container<?php echo $no ?>', {
 });
 		</script>
 <?php
-$no++;
-}
+  $i=$i+1;
+  }
+  echo $m;
 ?>
                                     <div id="morris-area-example" class="morris-charts morris-chart-height"></div>
                                 </div>
@@ -285,221 +296,9 @@ $no++;
     <!-- App js -->
     <script src="assets/js/app.js"></script>
 
-    <script>
-      var map;
-      function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-              lat: -0.323489,
-              lng: 100.349190
-            },
-            zoom: 8,
-            mapTypeId: 'roadmap'
-          });
-          mentawai();
-          digitasinya();
-      }
-var nkota = 0; var digitkota = [];
-function digitasinya() {
-  $.ajax({
-    url: 'data.php',
-    dataType: 'json',
-    cache: false,
-    success: function (arrays) {
-      for (i = 0; i < arrays.features.length; i++) {
-        var data = arrays.features[i];
-        var arrayGeometries = data.geometry.coordinates;
-        var jenis = data.jenis;
-        var id = data.properties.id;
-        var nama = data.properties.nama;
-        var link = "<button class='btn btn-info btn-xs fa fa-info-circle' title='View Details' onclick='detailprov("+'"'+data.properties.id+'"'+", "+'"'+data.properties.nama+'"'+", "+'"<?php echo $tahun ?>"'+", "+'"<?php echo $kategori ?>"'+")'></button> "+nama;
-        var idTitik = 0;
-        var hitungTitik = [];
-        while (idTitik < arrayGeometries[0][0].length) {
-          var aa = arrayGeometries[0][0][idTitik][0];
-          var bb = arrayGeometries[0][0][idTitik][1];
-          hitungTitik[idTitik] = {
-            lat: bb,
-            lng: aa
-          };
-          idTitik += 1;
-        }
-        var color = 'black';
-        if (id=="59") {
-            color='yellow';
-        }
-        else if (id=="60") {
-            color='magenta';
-        }
-        else if (id=="61") {
-            color='black';
-        }
-        else if (id=="62") {
-            color='red';
-        }
-        else if (id=="63") {
-            color='violet';
-        }
-        else if (id=="65") {
-            color='SpringGreen';
-        }
-        else if (id=="66") {
-            color='#410f01';
-        }
-        else if (id=="67") {
-            color='cyan';
-        }
-        else if (id=="68") {
-            color='purple';
-        }
-        else if (id=="69") {
-            color='#0d223f';
-        }
-        else if (id=="70") {
-            color='MediumBlue';
-        }
-        else if (id=="71") {
-            color='white';
-        }
-        else if (id=="72") {
-            color='DarkOrange';
-        }
-        else if (id=="73") {
-            color='Gold';
-        }
-        else if (id=="74") {
-            color='#8e5f78';
-        }
-        else if (id=="75") {
-            color='LightCoral';
-        }
-        else if (id=="76") {
-            color='Chartreuse';
-        }
-        else if (id=="77") {
-            color='Sienna';
-        }
-        else if (id=="78") {
-            color='#01410f';
-        }
-        digitkota[nkota] = new google.maps.Polygon({
-          paths: hitungTitik,
-          strokeColor: 'red',
-          strokeOpacity: 2,
-          strokeWeight: 0.5,
-          //fillColor: '#B22222',
-          fillColor: color,
-          fillOpacity: 0.7,
-          zIndex: 1,
-          content: link
-        });
-        digitkota[nkota].setMap(map);
-        digitkota[nkota].addListener('click', function (event) {
-          var lat = event.latLng.lat();
-          var lng = event.latLng.lng();
-          var info = {
-            lat: lat,
-            lng: lng
-          };
-          infoWindow.setContent(this.content);
-          infoWindow.setPosition(info);
-          infoWindow.open(map);
-          //detailprov(id, nama)
-        });
-        nkota = nkota + 1;
-      }
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      $('#gagal').modal('show');
-      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
-      $('#notifikasi').append(thrownError);
-    }
-  });
-  var infoWindow = new google.maps.InfoWindow({
-    map: map
-  });
-} 
-
-
-var markersDua = [];
-var infoDua = [];
-
-function detailprov(id,nama,tahun,kategori) { //menampilkan informasi
-  prov=nama;
-  hapusInfo();
-  console.log("fungsi info marker id= "+id+ " tahun: "+tahun+ " kategori: "+kategori);
-    $.ajax({
-    url: 'act/detail.php?prov='+id+'&tahun='+tahun+'&kategori='+kategori,
-    data: "",
-    dataType: 'json',
-    success: function (rows) {
-      for (var i in rows) {
-        var row = rows[i];
-        var id = row.id;
-        var text = row.text;
-        var latitude = row.latitude;
-        var longitude = row.longitude;
-        centerBaru = new google.maps.LatLng(row.latitude, row.longitude);
-        marker = new google.maps.Marker({
-          position: centerBaru,
-          map: map,
-          animation: google.maps.Animation.DROP,
-        });
-        markersDua.push(marker);
-        map.setCenter(centerBaru);
-        map.setZoom(10);
-        infowindow = new google.maps.InfoWindow({
-          position: centerBaru,
-          content: "<span style=color:black><center><b>" + prov + "</b><p>" + text + "<br></span>",
-          pixelOffset: new google.maps.Size(0, -33)
-        });
-        infoDua.push(infowindow);
-        infowindow.open(map);
-        klikInfoWindowLahan(id);
-      }
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      $('#gagal').modal('show');
-      $('#notifikasi').empty();$('#notifikasi').append(xhr.status);
-      $('#notifikasi').append(thrownError);
-    }
-  });
-}
-
-function klikInfoWindowLahan(id) {
-  google.maps.event.addListener(marker, "click", function () {
-    console.log("marker dengan id=" + id + " diklik");
-    detailprov(id);
-  });
-
-}
-
-function hapusInfo() {
-  for (var i = 0; i < infoDua.length; i++) {
-    markersDua[i].setMap(null);
-    infoDua[i].setMap(null);
-  }
-}
-
-function mentawai()
-{
-  cull = new google.maps.Data();
-  cull.loadGeoJson('inc/mentawai.php');
-  cull.setStyle(function(feature)
-  {
-    return({
-            fillColor: 'black',
-            strokeColor: '#f75d5d ',
-            strokeWeight: 0.4,
-            fillOpacity: 0.8
-          });          
-  }
-  );
-  cull.setMap(map);
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE&callback=initMap"
-async defer></script>
+<!--  -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE&callback=initMap"
+async defer></script> -->
 
 </body>
 

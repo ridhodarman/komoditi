@@ -158,12 +158,12 @@
         $id_jenis = $data['id_jenis'];
         $satuan = $data['satuan'];
         $n=0;
-        $sql2=pg_query("SELECT H.*, K.kabupaten FROM hasil AS H
+        $sql2=pg_query("SELECT H.*, K.nama FROM hasil AS H
                         join kab_kota AS K ON H.gid=K.gid
                         join jenis AS J ON J.id_jenis=H.id_jenis
                         where H.id_jenis = '$id_jenis' and H.tahun = '$tahun' order by H.gid");
         while ($data2=pg_fetch_assoc($sql2)) {
-            $kabupaten[$n]=$data2['kabupaten'];
+            $kabupaten[$n]=$data2['nama'];
             $jumlah[$n]=$data2['jumlah'];
             $n++;
         }     
