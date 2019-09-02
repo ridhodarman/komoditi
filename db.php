@@ -505,9 +505,9 @@ function hapusInfo() {
 
 function mentawai()
 {
-  cull = new google.maps.Data();
-  cull.loadGeoJson('inc/mentawai.php');
-  cull.setStyle(function(feature)
+  mentawai = new google.maps.Data();
+  mentawai.loadGeoJson('inc/mentawai.php');
+  mentawai.setStyle(function(feature)
   {
     return({
             fillColor: 'black',
@@ -517,7 +517,7 @@ function mentawai()
           });          
   }
   );
-  cull.setMap(map);
+  mentawai.setMap(map);
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE&callback=initMap"
